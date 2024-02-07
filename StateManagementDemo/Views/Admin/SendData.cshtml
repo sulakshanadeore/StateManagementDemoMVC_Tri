@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "SendData";
+}
+
+<h2>SendData</h2>
+
+<h1>Peek value= @ViewBag.custidPeekValue</h1>
+<h1>@ViewBag.custidValue</h1>
+
+<hr/>
+@foreach (var item in (List<StateManagementDemo.Models.CustModel>)TempData["custlist"])
+{
+    <div>
+        <p>@item.Custid</p>
+        <p>@item.CustName</p>
+        <p>@item.City</p>
+    </div>
+}

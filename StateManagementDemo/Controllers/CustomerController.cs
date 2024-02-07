@@ -81,9 +81,23 @@ namespace StateManagementDemo.Controllers
             ViewBag.custidData= TempData["temp_cu_id"];
             ViewBag.custnameData = TempData["temp_cu_name"];
             ViewBag.custcityData = TempData["temp_cu_city"];
-            int custidValue=Convert.ToInt32(TempData.Peek("temp_cu_id"));
+           // int custidValue=Convert.ToInt32(TempData.Peek("temp_cu_id"));
+
+            //ViewBag.custidPeekValue = custidValue;
+            //ViewBag.custidValue= TempData["temp_cu_name"];
+            return RedirectToAction("SendData","Admin");
+
+        }
+        public ActionResult SomeAction() 
+        {
+            int custidValue = Convert.ToInt32(TempData.Peek("temp_cu_id"));
+
             ViewBag.custidPeekValue = custidValue;
+
+            ViewBag.custidValue = TempData["temp_cu_name"];
             return View();
+
+
 
         }
 
