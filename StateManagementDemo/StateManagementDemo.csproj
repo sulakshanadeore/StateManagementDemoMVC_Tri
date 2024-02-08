@@ -193,6 +193,7 @@
     <Content Include="Views\Employee\ShowEmpDetails.cshtml" />
     <Content Include="Views\Employee\ShowEmpList.cshtml" />
     <Content Include="Views\Employee\ShowSelectedEmployee.cshtml" />
+    <Content Include="Views\Employee\NewEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

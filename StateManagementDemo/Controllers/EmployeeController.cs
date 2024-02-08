@@ -22,6 +22,8 @@ namespace StateManagementDemo.Controllers
         }
         public ActionResult Index()
         {
+            ViewBag.mysessionID = Session.SessionID;
+
 
             return View(emplist);
         }
@@ -70,9 +72,28 @@ namespace StateManagementDemo.Controllers
         
         
         }
-        
 
-        
+
+        public ActionResult NewEmployee()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewEmployee(EmpModel emp)
+        {
+
+            return RedirectToAction("Saved", new {id=emp.Empid } ) ;
+        }
+
+        public ActionResult Saved(int id)
+        {
+
+            return Content("Created employeed with Empid= " + id);
+        }
+
+
+
 
 
 
