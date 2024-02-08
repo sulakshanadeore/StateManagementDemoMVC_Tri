@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StateManagementDemo.Models;
@@ -83,13 +84,57 @@ namespace StateManagementDemo.Controllers
         public ActionResult NewEmployee(EmpModel emp)
         {
 
+            HttpCookie cookie = new HttpCookie("empdetails");
+            cookie.Expires = DateTime.Now.AddMinutes(10);
+            //cookie.Value=11;
+
+            cookie.Values.Add("empid", emp.Empid.ToString()); 
+            cookie.Values.Add("empname", emp.EmpName.ToString());
+            cookie.Values.Add("sal", emp.Salary.ToString());
+            cookie.Secure = false;
+            Response.Cookies.Add(cookie);   
+
             return RedirectToAction("Saved", new {id=emp.Empid } ) ;
         }
 
         public ActionResult Saved(int id)
         {
+           HttpCookie mycookieValue =Request.Cookies.Get("empdetails");
+            if (mycookieValue != null) {
 
-            return Content("Created employeed with Empid= " + id);
+                ViewBag.Employeeid = mycookieValue["empid"].ToString();
+                ViewBag.EmployeeName = mycookieValue["empname"].ToString();
+                ViewBag.EmployeeSalary = mycookieValue["sal"].ToString();
+
+
+
+            }
+
+
+            //return Content("Created employeed with Empid= " + id);
+            return View();
+        }
+
+
+
+        public ActionResult Edit(int id)
+        {
+            EmpModel empEdit=emplist.Find(edata => edata.Empid == id);
+            return View(empEdit);
+        
+        }
+
+        [HttpPost]
+        public ActionResult Edit(FormCollection values)
+        {
+            string ename = values["EmpName"];
+            int sal = Convert.ToInt32(values["Salary"]);
+            int empid =Convert.ToInt32(values["Empid"]);
+            EmpModel empEdit = emplist.Find(edata => edata.Empid == empid);
+            empEdit.EmpName = ename;
+            empEdit.Salary = sal;
+            return RedirectToAction("Index");
+
         }
 
 

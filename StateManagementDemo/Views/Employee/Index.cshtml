@@ -25,22 +25,29 @@
         <th></th>
     </tr>
     s
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Empid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmpName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Salary)
-        </td>
-        <td>
-            @Html.ActionLink("Select Employee", "Select", new {  id=item.Empid }) 
-        
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.ActionLink("Select Employee", "Select", new { id = item.Empid })
+
+            </td>
+            <td>
+                @Html.ActionLink("EditEmployee", "Edit", new { id = item.Empid })
+            </td>
+        </tr>
+
+    }
+
+
 
 </table>
